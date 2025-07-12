@@ -8,58 +8,54 @@
       font-family: Arial, sans-serif;
       text-align: center;
       margin-top: 100px;
+      background-color: #0f0f0f;
+      color: white;
     }
     button {
-      padding: 10px 20px;
+      padding: 12px 24px;
       font-size: 16px;
       cursor: pointer;
+      background-color: #00d084;
+      border: none;
+      border-radius: 5px;
+      color: black;
     }
     #keyDisplay {
-      margin-top: 20px;
+      margin-top: 30px;
       font-size: 20px;
-      color: green;
+      color: #00ff88;
       word-break: break-word;
     }
   </style>
 </head>
 <body>
-  <h1>🔐 License Key Generator</h1>
-  <button onclick="generateAndUploadKey()">Generate Key</button>
+  <h1>🔐 Ahtesham License Key Generator</h1>
+  <p>Click below to generate a license key valid for 10 minutes.</p>
+  <button onclick="requestLicense()">Generate License Key</button>
   <div id="keyDisplay"></div>
 
   <script>
-    function generateKey() {
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      let key = "";
-      for (let i = 0; i < 4; i++) {
-        if (i > 0) key += "-";
-        for (let j = 0; j < 5; j++) {
-          key += chars.charAt(Math.floor(Math.random() * chars.length));
+    async function requestLicense() {
+      document.getElementById("keyDisplay").textContent = "⌛ Generating license key...";
+      try {
+        const res = await fetch("https://license-api-zut2.onrender.com/addlicense", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ generate: true }) // You can remove body if unused
+        });
+
+        const data = await res.json();
+
+        if (data.success && data.licenseKey) {
+          document.getElementById("keyDisplay").textContent = `✅ Your License Key:\n${data.licenseKey}`;
+        } else {
+          throw new Error("Invalid response");
         }
+      } catch (err) {
+        console.error(err);
+        document.getElementById("keyDisplay").textContent = "❌ Failed to generate key. Try again later.";
       }
-      return key;
     }
-
-    async function generateAndUploadKey() {
-  const key = generateKey();
-  document.getElementById("keyDisplay").textContent = "⌛ Saving key...";
-
-  try {
-    const res = await fetch("https://license-api-zut2.onrender.com/addlicense", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ key })
-    });
-
-    if (!res.ok) throw new Error("Failed to save key");
-
-    const data = await res.json();
-    document.getElementById("keyDisplay").textContent = `✅ License Key Saved: ${key}`;
-  } catch (err) {
-    document.getElementById("keyDisplay").textContent = "❌ Error saving key.";
-    console.error(err);
-  }
-}
   </script>
 </body>
 </html>
