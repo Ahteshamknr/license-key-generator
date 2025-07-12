@@ -2,60 +2,272 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>License Key Generator</title>
+  <title>Ahtesham Pc Booster License Key Generator</title>
+   <link rel="icon" type="image/png" href="LOGO.png">
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
       font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #1f1f1f, #0d0d0d);
+      color: #fff;
       text-align: center;
-      margin-top: 100px;
-      background-color: #0f0f0f;
-      color: white;
+      overflow: hidden;
     }
+
+    #tsparticles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      background-color: #1a1a1a;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 204, 255, 0.1), 0 0 5px rgba(255, 255, 255, 0.05);
+      max-width: 500px;
+      width: 90%;
+      animation: fadeIn 0.8s ease;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      color: #58a6ff;
+    }
+
     button {
       padding: 12px 24px;
       font-size: 16px;
-      cursor: pointer;
-      background-color: #00d084;
+      margin: 10px 5px;
       border: none;
-      border-radius: 5px;
-      color: black;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    #keyDisplay {
-      margin-top: 30px;
-      font-size: 20px;
-      color: #00ff88;
+
+    button:hover:not(:disabled) {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    button:disabled {
+      background-color: #444;
+      cursor: not-allowed;
+    }
+
+    #adBtn {
+      background-color: #fbbf24;
+      color: #000;
+    }
+
+    #genBtn {
+      background-color: #00d084;
+      color: #000;
+    }
+
+    #keyDisplay, #timeLeft, #copiedMessage {
+      margin-top: 20px;
+      font-size: 18px;
       word-break: break-word;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    #copiedMessage {
+      color: lime;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>🔐 Ahtesham License Key Generator</h1>
-  <p>Click below to generate a license key valid for 10 minutes.</p>
-  <button onclick="requestLicense()">Generate License Key</button>
-  <div id="keyDisplay"></div>
 
+  <!-- Particle background -->
+  <div id="tsparticles"></div>
+
+  <!-- Content wrapper -->
+  <div class="wrapper">
+    <div class="container">
+      <h1>🔐 Ahtesham Pc Booster License Key Generator</h1>
+
+      <button id="adBtn" onclick="goToAd()">Step 1: Complete Ad</button>
+      <button id="genBtn" onclick="requestLicense()" disabled>Step 2: Generate License Key</button>
+
+      <div id="keyDisplay"></div>
+      <div id="copiedMessage"></div>
+      <div id="timeLeft" style="color: #ccc;"></div>
+    </div>
+  </div>
+
+  <!-- tsParticles CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.0.3/tsparticles.bundle.min.js"></script>
+
+  <!-- tsParticles config -->
   <script>
+    tsParticles.load("tsparticles", {
+      fullScreen: {
+        enable: false
+      },
+      background: {
+        color: "#0d0d0d"
+      },
+      particles: {
+        number: {
+          value: 70,
+          density: { enable: true, area: 800 }
+        },
+        color: { value: "#00ffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.4 },
+        size: { value: { min: 1, max: 3 } },
+        move: {
+          enable: true,
+          speed: 1,
+          outModes: { default: "out" }
+        }
+      }
+    });
+  </script>
+
+  <!-- License Key Script -->
+  <script>
+    const adLink = "https://shrinkme.ink/Ahtesham_PC_Booster_Key_Gen";
+
+    function goToAd() {
+      localStorage.setItem("adCompleteReady", "true");
+      localStorage.setItem("keyUsedOnce", "false");
+      window.open(adLink, "_blank");
+      setTimeout(enableGenerateIfAllowed, 1000);
+    }
+
+    function enableGenerateIfAllowed() {
+      const adReady = localStorage.getItem("adCompleteReady") === "true";
+      const usedOnce = localStorage.getItem("keyUsedOnce") === "true";
+      const expiry = parseInt(localStorage.getItem("expiry") || "0");
+      const now = Date.now();
+
+      if (adReady && !usedOnce) {
+        document.getElementById("genBtn").disabled = false;
+      } else if (now > expiry) {
+        document.getElementById("genBtn").disabled = true;
+        localStorage.removeItem("adCompleteReady");
+        localStorage.removeItem("keyUsedOnce");
+      }
+    }
+
+    window.onload = function () {
+      const savedKey = localStorage.getItem("key");
+      const expiry = parseInt(localStorage.getItem("expiry") || "0");
+      const now = Date.now();
+
+      if (savedKey && expiry > now) {
+        displayKey(savedKey, expiry);
+      } else {
+        localStorage.removeItem("key");
+        localStorage.removeItem("expiry");
+        enableGenerateIfAllowed();
+      }
+    };
+
+    let timerInterval;
+
     async function requestLicense() {
-      document.getElementById("keyDisplay").textContent = "⌛ Generating license key...";
+      const keyDiv = document.getElementById("keyDisplay");
+      const timeDiv = document.getElementById("timeLeft");
+      const copiedMsg = document.getElementById("copiedMessage");
+      const genBtn = document.getElementById("genBtn");
+
+      keyDiv.textContent = "⌛ Generating key...";
+      timeDiv.textContent = "";
+      copiedMsg.textContent = "";
+      genBtn.disabled = true;
+
       try {
         const res = await fetch("https://license-api-zut2.onrender.com/addlicense", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ generate: true }) // You can remove body if unused
+          body: JSON.stringify({ generate: true })
         });
 
         const data = await res.json();
 
         if (data.success && data.licenseKey) {
-          document.getElementById("keyDisplay").textContent = `✅ Your License Key:\n${data.licenseKey}`;
+          const key = data.licenseKey;
+          const match = key.match(/--EXP-(\d+)/);
+          if (!match) throw new Error("Invalid expiry format");
+
+          const expiry = parseInt(match[1]) * 1000;
+
+          localStorage.setItem("key", key);
+          localStorage.setItem("expiry", expiry);
+          localStorage.setItem("keyUsedOnce", "true");
+
+          displayKey(key, expiry);
         } else {
           throw new Error("Invalid response");
         }
       } catch (err) {
         console.error(err);
-        document.getElementById("keyDisplay").textContent = "❌ Failed to generate key. Try again later.";
+        keyDiv.textContent = "❌ Failed to generate key.";
+        genBtn.disabled = false;
       }
     }
+
+    function displayKey(key, expiry) {
+      const keyDiv = document.getElementById("keyDisplay");
+      const timeDiv = document.getElementById("timeLeft");
+      const copiedMsg = document.getElementById("copiedMessage");
+      const genBtn = document.getElementById("genBtn");
+
+      keyDiv.textContent = `✅ Your License Key:\n${key}`;
+      navigator.clipboard.writeText(key);
+      copiedMsg.textContent = "📋 Copied to clipboard!";
+      genBtn.disabled = true;
+      genBtn.textContent = "Key Generated ✅";
+
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        const now = Date.now();
+        const remaining = expiry - now;
+
+        if (remaining <= 0) {
+          clearInterval(timerInterval);
+          localStorage.removeItem("key");
+          localStorage.removeItem("expiry");
+          localStorage.removeItem("keyUsedOnce");
+          localStorage.removeItem("adCompleteReady");
+          timeDiv.textContent = "⛔ License expired! Go through ad again.";
+          genBtn.disabled = true;
+          genBtn.textContent = "Step 2: Generate License Key";
+          return;
+        }
+
+        const mins = Math.floor(remaining / 60000);
+        const secs = Math.floor((remaining % 60000) / 1000);
+        timeDiv.textContent = `⏳ Time left: ${mins}m ${secs}s`;
+      }, 1000);
+    }
   </script>
+
 </body>
 </html>
