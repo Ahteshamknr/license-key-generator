@@ -41,26 +41,25 @@
     }
 
     async function generateAndUploadKey() {
-      const key = generateKey();
+  const key = generateKey();
+  document.getElementById("keyDisplay").textContent = "⌛ Saving key...";
 
-      document.getElementById("keyDisplay").textContent = "⌛ Saving key...";
+  try {
+    const res = await fetch("https://license-api-zut2.onrender.com/save", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ key })
+    });
 
-      try {
-        const res = await fetch("https://license-api-zut2.onrender.com", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ key })
-        });
+    if (!res.ok) throw new Error("Failed to save key");
 
-        if (!res.ok) throw new Error("Failed to save key");
-
-        const data = await res.json();
-        document.getElementById("keyDisplay").textContent = `✅ License Key Saved: ${key}`;
-      } catch (err) {
-        document.getElementById("keyDisplay").textContent = "❌ Error saving key.";
-        console.error(err);
-      }
-    }
+    const data = await res.json();
+    document.getElementById("keyDisplay").textContent = `✅ License Key Saved: ${key}`;
+  } catch (err) {
+    document.getElementById("keyDisplay").textContent = "❌ Error saving key.";
+    console.error(err);
+  }
+}
   </script>
 </body>
 </html>
