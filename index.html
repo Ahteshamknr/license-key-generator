@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>License Key Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #keyDisplay {
+      margin-top: 20px;
+      font-size: 20px;
+      color: green;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔐 License Key Generator</h1>
+  <button onclick="generateAndUploadKey()">Generate Key</button>
+  <div id="keyDisplay"></div>
+
+  <script>
+    function generateKey() {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let key = "";
+      for (let i = 0; i < 4; i++) {
+        if (i > 0) key += "-";
+        for (let j = 0; j < 5; j++) {
+          key += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+      }
+      return key;
+    }
+
+    async function generateAndUploadKey() {
+      const key = generateKey();
+
+      document.getElementById("keyDisplay").textContent = "⌛ Saving key...";
+
+      try {
+        const res = await fetch("https://license-api-zut2.onrender.com", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ key })
+        });
+
+        if (!res.ok) throw new Error("Failed to save key");
+
+        const data = await res.json();
+        document.getElementById("keyDisplay").textContent = `✅ License Key Saved: ${key}`;
+      } catch (err) {
+        document.getElementById("keyDisplay").textContent = "❌ Error saving key.";
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
