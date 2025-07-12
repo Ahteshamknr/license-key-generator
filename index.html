@@ -45,7 +45,7 @@
   document.getElementById("keyDisplay").textContent = "⌛ Saving key...";
 
   try {
-    const res = await fetch("https://license-api-zut2.onrender.com/save", {
+    const res = await fetch("https://license-api-zut2.onrender.com/addlicense", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ key })
