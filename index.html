@@ -72,11 +72,6 @@
       cursor: not-allowed;
     }
 
-    #adBtn {
-      background-color: #fbbf24;
-      color: #000;
-    }
-
     #genBtn {
       background-color: #00d084;
       color: #000;
@@ -109,10 +104,7 @@
   <div class="wrapper">
     <div class="container">
       <h1>🔐 Ahtesham Pc Booster License Key Generator</h1>
-
-      <button id="adBtn" onclick="goToAd()">Step 1: Complete Ad</button>
-      <button id="genBtn" onclick="requestLicense()" disabled>Step 2: Generate License Key</button>
-
+      <button id="genBtn" onclick="requestLicense()">Generate License Key</button>
       <div id="keyDisplay"></div>
       <div id="copiedMessage"></div>
       <div id="timeLeft" style="color: #ccc;"></div>
@@ -151,30 +143,6 @@
 
   <!-- License Key Script -->
   <script>
-    const adLink = "https://shrinkme.ink/Ahtesham_PC_Booster_Key_Gen";
-
-    function goToAd() {
-      localStorage.setItem("adCompleteReady", "true");
-      localStorage.setItem("keyUsedOnce", "false");
-      window.open(adLink, "_blank");
-      setTimeout(enableGenerateIfAllowed, 1000);
-    }
-
-    function enableGenerateIfAllowed() {
-      const adReady = localStorage.getItem("adCompleteReady") === "true";
-      const usedOnce = localStorage.getItem("keyUsedOnce") === "true";
-      const expiry = parseInt(localStorage.getItem("expiry") || "0");
-      const now = Date.now();
-
-      if (adReady && !usedOnce) {
-        document.getElementById("genBtn").disabled = false;
-      } else if (now > expiry) {
-        document.getElementById("genBtn").disabled = true;
-        localStorage.removeItem("adCompleteReady");
-        localStorage.removeItem("keyUsedOnce");
-      }
-    }
-
     window.onload = function () {
       const savedKey = localStorage.getItem("key");
       const expiry = parseInt(localStorage.getItem("expiry") || "0");
@@ -185,7 +153,6 @@
       } else {
         localStorage.removeItem("key");
         localStorage.removeItem("expiry");
-        enableGenerateIfAllowed();
       }
     };
 
@@ -220,7 +187,6 @@
 
           localStorage.setItem("key", key);
           localStorage.setItem("expiry", expiry);
-          localStorage.setItem("keyUsedOnce", "true");
 
           displayKey(key, expiry);
         } else {
@@ -254,11 +220,9 @@
           clearInterval(timerInterval);
           localStorage.removeItem("key");
           localStorage.removeItem("expiry");
-          localStorage.removeItem("keyUsedOnce");
-          localStorage.removeItem("adCompleteReady");
-          timeDiv.textContent = "⛔ License expired! Go through ad again.";
-          genBtn.disabled = true;
-          genBtn.textContent = "Step 2: Generate License Key";
+          timeDiv.textContent = "⛔ License expired! Generate again.";
+          genBtn.disabled = false;
+          genBtn.textContent = "Generate License Key";
           return;
         }
 
@@ -281,6 +245,5 @@
       }, 1000);
     }
   </script>
-
 </body>
 </html>
