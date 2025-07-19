@@ -107,41 +107,43 @@
       }, 1000);
     };
 
-    const requestLicense = async () => {
-      genBtn.disabled = true;
-      genBtn.textContent = "Please wait...";
+   const requestLicense = async () => {
+  genBtn.disabled = true;
+  genBtn.textContent = "Please wait...";
 
-      try {
-        const res = await fetch("https://license-api-zut2.onrender.com/addlicense", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ generate: true })
-        });
+  try {
+    const res = await fetch("https://license-api-zut2.onrender.com/addlicense", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ generate: true })
+    });
 
-        const key = await res.text();
+    const data = await res.json();
+    const key = data.licenseKey;
 
-        if (key && key.includes("--EXP-")) {
-          const match = key.match(/--EXP-(\d+)/);
-          if (!match) throw new Error("Invalid expiry format");
+    if (data.success && key && key.includes("--EXP-")) {
+      const match = key.match(/--EXP-(\d+)/);
+      if (!match) throw new Error("Invalid expiry format");
 
-          const expiry = parseInt(match[1]) * 1000;
+      const expiry = parseInt(match[1]) * 1000;
 
-          localStorage.setItem("key", key);
-          localStorage.setItem("expiry", expiry);
-          localStorage.setItem("keyUsedOnce", "true");
+      localStorage.setItem("key", key);
+      localStorage.setItem("expiry", expiry);
+      localStorage.setItem("keyUsedOnce", "true");
 
-          displayKey(key, expiry);
-        } else {
-          throw new Error("Invalid key format");
-        }
+      displayKey(key, expiry);
+    } else {
+      throw new Error("Invalid key format");
+    }
 
-      } catch (err) {
-        console.error(err);
-        keyDiv.textContent = "❌ Failed to generate key.";
-        genBtn.disabled = false;
-        genBtn.textContent = "Generate Key";
-      }
-    };
+  } catch (err) {
+    console.error(err);
+    keyDiv.textContent = "❌ Failed to generate key.";
+    genBtn.disabled = false;
+    genBtn.textContent = "Generate Key";
+  }
+};
+
 
     // Handle key reuse + expiry
     window.onload = () => {
