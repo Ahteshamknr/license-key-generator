@@ -1,171 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ahtesham Tech - License Key Generator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ahtesham Key Generator</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0f0f0f;
-      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #101010;
+      color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-    }
-
-    img {
-      width: 100px;
-      margin-bottom: 10px;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
     }
 
     h1 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      color: #00ffc3;
+      color: #00ffe1;
+      font-size: 28px;
+      margin-bottom: 30px;
     }
 
-    #key {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #fff;
-      background: #1c1c1c;
-      padding: 12px 20px;
-      border-radius: 8px;
-      display: inline-block;
-      min-width: 250px;
-    }
-
-    #generate {
-      background: #00ffc3;
-      color: #000;
+    button {
+      background-color: #00ffe1;
+      color: black;
       border: none;
       padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
+      margin: 10px;
       font-size: 16px;
-      margin-top: 20px;
+      cursor: pointer;
+      border-radius: 6px;
       transition: background 0.3s;
     }
 
-    #generate:disabled {
-      background: #555;
-      cursor: not-allowed;
+    button:hover {
+      background-color: #00cbb7;
     }
 
-    #timer {
-      margin-top: 15px;
-      color: #aaa;
+    #key {
+      margin-top: 30px;
+      font-size: 18px;
+      word-wrap: break-word;
+      text-align: center;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
   </style>
 </head>
 <body>
 
-  <img src="logo.png" alt="Logo" />
-  <h1>Ahtesham Tech</h1>
+  <h1>🛡️ Ahtesham Tech - License Key</h1>
 
-  <div id="key">Click below to generate a key</div>
+  <div class="btn-group">
+    <button disabled>✔️ Step 1 Complete</button>
+    <button id="generateBtn">🎯 Generate License Key</button>
+  </div>
 
-  <button id="generate">Generate Key</button>
-
-  <div id="timer"></div>
+  <div id="key"></div>
 
   <script>
-    const genBtn = document.getElementById("generate");
     const keyDiv = document.getElementById("key");
-    const timerDiv = document.getElementById("timer");
+    const genBtn = document.getElementById("generateBtn");
 
     const displayKey = (key, expiry) => {
-      keyDiv.textContent = "🔑 " + key;
-
-      const remaining = expiry - Date.now();
-      if (remaining > 0) startCountdown(remaining);
-    };
-
-    const startCountdown = (ms) => {
+      const date = new Date(expiry);
+      keyDiv.textContent = `✅ License Key: ${key}\n\n⏳ Expires on: ${date.toLocaleString()}`;
       genBtn.disabled = true;
-
-      const interval = setInterval(() => {
-        const remaining = Math.floor((localStorage.getItem("expiry") - Date.now()) / 1000);
-        if (remaining <= 0) {
-          clearInterval(interval);
-          timerDiv.textContent = "";
-          genBtn.disabled = false;
-          genBtn.textContent = "Generate Key";
-          return;
-        }
-
-        const minutes = Math.floor(remaining / 60);
-        const seconds = remaining % 60;
-        timerDiv.textContent = `⏳ Next key in: ${minutes}m ${seconds}s`;
-        genBtn.textContent = "Please wait...";
-      }, 1000);
+      genBtn.textContent = "Key Generated";
     };
 
-   const requestLicense = async () => {
-  genBtn.disabled = true;
-  genBtn.textContent = "Please wait...";
+    const requestLicense = async () => {
+      genBtn.disabled = true;
+      genBtn.textContent = "Please wait...";
 
-  try {
-    const res = await fetch("https://license-api-zut2.onrender.com/addlicense", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ generate: true })
-    });
+      try {
+        const res = await fetch("https://license-api-zut2.onrender.com/addlicense", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ generate: true })
+        });
 
-    const data = await res.json();
-    const key = data.licenseKey;
+        const data = await res.json();
+        const key = data.licenseKey;
 
-    if (data.success && key && key.includes("--EXP-")) {
-      const match = key.match(/--EXP-(\d+)/);
-      if (!match) throw new Error("Invalid expiry format");
+        if (data.success && key && key.includes("--EXP-")) {
+          const match = key.match(/--EXP-(\d+)/);
+          if (!match) throw new Error("Invalid expiry format");
 
-      const expiry = parseInt(match[1]) * 1000;
+          const expiry = parseInt(match[1]) * 1000;
 
-      localStorage.setItem("key", key);
-      localStorage.setItem("expiry", expiry);
-      localStorage.setItem("keyUsedOnce", "true");
+          localStorage.setItem("key", key);
+          localStorage.setItem("expiry", expiry);
+          localStorage.setItem("keyUsedOnce", "true");
 
-      displayKey(key, expiry);
-    } else {
-      throw new Error("Invalid key format");
-    }
-
-  } catch (err) {
-    console.error(err);
-    keyDiv.textContent = "❌ Failed to generate key.";
-    genBtn.disabled = false;
-    genBtn.textContent = "Generate Key";
-  }
-};
-
-
-    // Handle key reuse + expiry
-    window.onload = () => {
-      const key = localStorage.getItem("key");
-      const expiry = localStorage.getItem("expiry");
-
-      if (key && expiry) {
-        const exp = parseInt(expiry);
-        if (Date.now() < exp) {
-          displayKey(key, exp);
-          genBtn.disabled = true;
+          displayKey(key, expiry);
         } else {
-          localStorage.removeItem("key");
-          localStorage.removeItem("expiry");
-          genBtn.disabled = false;
+          throw new Error("Invalid key format");
         }
+
+      } catch (err) {
+        console.error(err);
+        keyDiv.textContent = "❌ Failed to generate key.";
+        genBtn.disabled = false;
+        genBtn.textContent = "Generate License Key";
       }
     };
 
-    genBtn.addEventListener("click", () => {
-      requestLicense();
-    });
+    genBtn.addEventListener("click", requestLicense);
+
+    // Load key if already generated and valid
+    const savedKey = localStorage.getItem("key");
+    const savedExpiry = parseInt(localStorage.getItem("expiry"));
+
+    if (savedKey && savedExpiry && savedExpiry > Date.now()) {
+      displayKey(savedKey, savedExpiry);
+    }
   </script>
+
 </body>
 </html>
