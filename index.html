@@ -125,15 +125,26 @@
   <!-- tsParticles config -->
   <script>
     tsParticles.load("tsparticles", {
-      fullScreen: { enable: false },
-      background: { color: "#0d0d0d" },
+      fullScreen: {
+        enable: false
+      },
+      background: {
+        color: "#0d0d0d"
+      },
       particles: {
-        number: { value: 70, density: { enable: true, area: 800 } },
+        number: {
+          value: 70,
+          density: { enable: true, area: 800 }
+        },
         color: { value: "#00ffff" },
         shape: { type: "circle" },
         opacity: { value: 0.4 },
         size: { value: { min: 1, max: 3 } },
-        move: { enable: true, speed: 1, outModes: { default: "out" } }
+        move: {
+          enable: true,
+          speed: 1,
+          outModes: { default: "out" }
+        }
       }
     });
   </script>
@@ -141,7 +152,6 @@
   <!-- License Key Script -->
   <script>
     const adLink = "https://shrinkme.ink/Ahtesham_PC_Booster_Key_Gen";
-    let timerInterval;
 
     function goToAd() {
       localStorage.setItem("adCompleteReady", "true");
@@ -168,8 +178,9 @@
     window.onload = function () {
       const savedKey = localStorage.getItem("key");
       const expiry = parseInt(localStorage.getItem("expiry") || "0");
+      const now = Date.now();
 
-      if (savedKey && expiry > Date.now()) {
+      if (savedKey && expiry > now) {
         displayKey(savedKey, expiry);
       } else {
         localStorage.removeItem("key");
@@ -177,6 +188,8 @@
         enableGenerateIfAllowed();
       }
     };
+
+    let timerInterval;
 
     async function requestLicense() {
       const keyDiv = document.getElementById("keyDisplay");
@@ -239,7 +252,10 @@
 
         if (remaining <= 0) {
           clearInterval(timerInterval);
-          localStorage.clear();
+          localStorage.removeItem("key");
+          localStorage.removeItem("expiry");
+          localStorage.removeItem("keyUsedOnce");
+          localStorage.removeItem("adCompleteReady");
           timeDiv.textContent = "⛔ License expired! Go through ad again.";
           genBtn.disabled = true;
           genBtn.textContent = "Step 2: Generate License Key";
@@ -252,7 +268,16 @@
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
 
-        timeDiv.textContent = `⏳ Time left: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        let timeStr = "⏳ Time left: ";
+        if (days > 0) {
+          timeStr += `${days}d ${hours}h ${minutes}m`;
+        } else if (hours > 0) {
+          timeStr += `${hours}h ${minutes}m`;
+        } else {
+          timeStr += `${minutes}m ${seconds}s`;
+        }
+
+        timeDiv.textContent = timeStr;
       }, 1000);
     }
   </script>
