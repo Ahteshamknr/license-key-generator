@@ -2,192 +2,232 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ahtesham Tech - Pc Booster License Key Generator</title>
-  <link rel="icon" type="image/png" href="LOGO.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ahtesham Tech Tool Unlocker</title>
+  <meta name="description" content="Download Ahtesham Tech Tool Unlocker from Google Play. Scan QR or follow the instructions to install." />
+  <link rel="icon" type="image/png" href="LOGO.png" />
+
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom right, #101010, #000000);
-      color: #fff;
+    /* Top notice */
+    .top-notice {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 0.6rem 1rem;
+      font-weight: 600;
       text-align: center;
+      z-index: 999;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+    body:not(.dark) .top-notice {
+      background: #FFD43B;
+      color: #222;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    body.dark .top-notice {
+      background: #1E40AF;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    /* Base style */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #e0e0e0;
+      margin: 0;
+      padding: 4.5rem 2rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      gap: 2rem;
+      animation: fadeIn 0.6s ease-in-out;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .card {
+      background: #f0f0f3;
+      border-radius: 1rem;
+      box-shadow:  10px 10px 20px #bebebe,
+                   -10px -10px 20px #ffffff;
+      width: 280px;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card img.qr {
+      width: 140px; height: 140px; border-radius: 0.75rem;
+      box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
+      object-fit: cover; user-select: none;
+    }
+    h2 {
+      font-weight: 700; font-size: 1.125rem; color: #1a1a1a;
+      margin-top: 1.25rem; margin-bottom: 0.5rem; user-select: none;
+    }
+    p.small-desc {
+      font-size: 0.7rem; line-height: 1rem; color: #878787;
+      margin-bottom: 1rem; user-select: none; min-height: 2rem;
+    }
+
+    /* Download Button */
+    button.neumorphic-btn {
+      border-radius: 2rem; border: none; padding: 0.5rem 2rem;
+      font-weight: 600; letter-spacing: 0.1em; cursor: pointer;
+      user-select: none; transition: all 0.3s ease;
+      font-family: 'Courier New', Courier, monospace; font-size: 0.9rem;
+      display: flex; align-items: center; gap: 0.5rem; justify-content: center;
+    }
+    body:not(.dark) button.neumorphic-btn {
+      background: #FFD43B;
+      color: #222;
+      box-shadow:  5px 5px 10px #c2c2c2, -5px -5px 10px #ffffff;
+    }
+    body.dark button.neumorphic-btn {
+      background: #1E40AF;
+      color: #fff;
+      box-shadow:  5px 5px 10px #0a0a0a, -5px -5px 10px #2a2a2a;
+    }
+
+    .center-icon { width: 72px; height: 72px; filter: drop-shadow(3px 3px 2px rgb(0 0 0 / 0.2)); user-select: none; }
+    .middle-text { font-weight: 500; font-size: 1.1rem; color: #1a1a1a; margin: 1rem 0 0.5rem 0; user-select: none; }
+    .middle-separator { height: 5px; width: 2rem; background: #2c2f33; border-radius: 0.25rem; margin-bottom: 1rem; filter: drop-shadow(1px 1px 2px rgb(0 0 0 / 0.2)); user-select: none; }
+    .playstore-text { font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem; user-select: none; color: #111111; }
+    .playstore-subtext { font-size: 0.625rem; color: #666666; margin-bottom: 1.3rem; user-select: none; min-height: 1.5rem; line-height: 1rem; }
+
+    .instructions-list { list-style: none; padding: 0; margin: 0; color: #222222; font-size: 0.9rem; text-align: left; }
+    .instructions-list li {
+      margin: 1rem 0; font-weight: 600; user-select: none; background: #f7f7f7;
+      padding: 0.75rem 1rem; border-radius: 0.5rem;
+      box-shadow:  8px 8px 16px #c2c2c2, -8px -8px 16px #ffffff;
+      line-height: 1.2rem; position: relative; padding-left: 2.5rem;
+    }
+    .instructions-list li::before {
+      content: attr(data-index);
+      position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+      width: 1.8rem; height: 1.8rem; border-radius: 9999px; background: white;
+      box-shadow:  3px 3px 5px #bebebe, -3px -3px 5px #ffffff;
+      color: #2c2f33; font-weight: 700; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center; user-select: none;
+    }
+
+    @media (max-width: 900px) {
+      body { flex-direction: column; padding: 4.5rem 1rem 1rem; gap: 1.5rem; }
+      .card { width: 90vw; max-width: 320px; }
+    }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+    /* Dark Mode */
+    body.dark { background: #121212; color: #f0f0f0; }
+    body.dark .card {
+      background: #1e1e1e;
+      box-shadow:  10px 10px 20px #0a0a0a, -10px -10px 20px #2a2a2a;
+    }
+    body.dark h2, body.dark .middle-text, body.dark .playstore-text { color: #f0f0f0; }
+    body.dark .instructions-list li {
+      background: #2a2a2a;
+      box-shadow:  8px 8px 16px #0a0a0a, -8px -8px 16px #3a3a3a;
+      color: #f0f0f0;
+    }
+    body.dark .instructions-list li::before {
+      background: #1e1e1e; color: #f0f0f0;
+      box-shadow:  3px 3px 5px #0a0a0a, -3px -3px 5px #2a2a2a;
+    }
+    body.dark p.small-desc, body.dark .playstore-subtext { color: #bbbbbb; }
+    body.dark .middle-separator { background: #f0f0f0; }
+
+    /* Toggle + Socials container */
+    .top-right-controls {
+      position: fixed;
+      top: 3.8rem;
+      right: 1rem;
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 0.6rem;
+      z-index: 998;
     }
+    .toggle-btn {
+      border: none; border-radius: 20px;
+      padding: 0.5rem 1rem; cursor: pointer;
+      font-size: 0.8rem; font-weight: 600; transition: 0.3s ease;
+    }
+    body:not(.dark) .toggle-btn { background: #FFD43B; color: #222; }
+    body.dark .toggle-btn { background: #1E40AF; color: #fff; }
 
-    .container {
-      background-color: #1a1a1a;
-      padding: 40px 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(0, 204, 255, 0.1), 0 0 5px rgba(255, 255, 255, 0.05);
-      max-width: 500px;
-      width: 90%;
-      animation: fadeIn 0.8s ease;
+    /* Social buttons */
+    .social-btn {
+      font-size: 1.2rem;
+      text-decoration: none;
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      transition: transform 0.2s ease, opacity 0.2s ease;
     }
-
-    h1 {
-      font-size: 22px;
-      margin-bottom: 30px;
-      color: #58a6ff;
-    }
-
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
-      margin: 10px 5px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background-color: #00d084;
-      color: #000;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    button:hover:not(:disabled) {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
-
-    button:disabled {
-      background-color: #444;
-      cursor: not-allowed;
-    }
-
-    #keyDisplay, #timeLeft, #copiedMessage {
-      margin-top: 20px;
-      font-size: 18px;
-      word-break: break-word;
-      animation: fadeIn 0.6s ease forwards;
-    }
-
-    #copiedMessage {
-      color: lime;
-      font-weight: bold;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .social-btn:hover { transform: scale(1.15); opacity: 0.8; }
+    .social-btn.instagram { color: #E1306C; }
+    .social-btn.youtube { color: #FF0000; }
+    .social-btn.whatsapp { color: #25D366; }
   </style>
 </head>
-<body>
-
-  <div class="container">
-    <h1>🔐 Ahtesham Tech - Pc Booster License Key Generator</h1>
-    <button id="genBtn" onclick="requestLicense()">Generate License Key</button>
-    <div id="keyDisplay"></div>
-    <div id="copiedMessage"></div>
-    <div id="timeLeft" style="color: #ccc;"></div>
+<body class="dark">
+  <div class="top-notice">
+    Notice: License generation has been permanently shifted to the application. Follow the steps below to generate your code.
   </div>
 
+  <!-- Toggle + Socials -->
+  <div class="top-right-controls">
+    <button class="toggle-btn" onclick="toggleMode()">☀️ Day</button>
+    <a href="https://www.instagram.com/ahtesham.vfx/" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.youtube.com/@Ahtesham_Tech" target="_blank" class="social-btn youtube"><i class="fab fa-youtube"></i></a>
+    <a href="https://chat.whatsapp.com/KyYf51uOeW6IlUAa9b1X7z" target="_blank" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+  </div>
+
+  <!-- Middle Card -->
+  <section class="card" aria-label="Ahtesham Tech Tool Unlocker download">
+    <img class="center-icon" src="play.png"/>
+    <p class="middle-text">Ahtesham Tech Tool Unlocker</p>
+    <div class="middle-separator"></div>
+    <a href="https://play.google.com/store/apps/details?id=com.ahteshamtech.licensekeygenerator&pcampaignid=web_share" target="_blank" rel="noopener">
+      <button class="neumorphic-btn" type="button">DOWNLOAD</button>
+    </a>
+    <p class="small-desc">Visit the Play Store to get the latest version.</p>
+  </section>
+
+  <!-- Left Card -->
+  <section class="card" aria-label="Scan to Download QR code">
+    <a href="https://play.google.com/store/apps/details?id=com.ahteshamtech.licensekeygenerator&pcampaignid=web_share" target="_blank" rel="noopener">
+      <img class="qr" src="qr.png" alt="QR Code for Ahtesham Tech Tool Unlocker"/>
+    </a>
+    <h2>Scan to Download</h2>
+    <p class="small-desc">Scan The QR Code to get the latest version quickly and safely.</p>
+  </section>
+
+  <!-- Right Card -->
+  <section class="card" aria-label="Instructions to download from Google Play Store">
+    <div class="playstore-text">Google Play Store</div>
+    <p class="playstore-subtext">How to download Ahtesham Tech Tool Unlocker</p>
+    <ol class="instructions-list">
+      <li data-index="1" style="padding-left: 50px;">Open Play Store app & search for <b>Ahtesham Tech Tool Unlocker</b></li>
+      <li data-index="2" style="padding-left: 50px;">Tap Install to download and install</li>
+      <li data-index="3" style="padding-left: 50px;">Open the App and Click On <b>Get Access Code</b> Wait For it To Generate</li>
+      <li data-index="4" style="padding-left: 50px;">Enter The Code In The Software To Unlock It</li>
+    </ol>
+  </section>
+
   <script>
-    window.onload = function () {
-      const savedKey = localStorage.getItem("key");
-      const expiry = parseInt(localStorage.getItem("expiry") || "0");
-      const now = Date.now();
-
-      if (savedKey && expiry > now) {
-        displayKey(savedKey, expiry);
+    function toggleMode() {
+      document.body.classList.toggle("dark");
+      const btn = document.querySelector(".toggle-btn");
+      if (document.body.classList.contains("dark")) {
+        btn.textContent = "☀️ Day";
       } else {
-        localStorage.removeItem("key");
-        localStorage.removeItem("expiry");
+        btn.textContent = "🌙 Night";
       }
-    };
-
-    let timerInterval;
-
-    async function requestLicense() {
-      const keyDiv = document.getElementById("keyDisplay");
-      const timeDiv = document.getElementById("timeLeft");
-      const copiedMsg = document.getElementById("copiedMessage");
-      const genBtn = document.getElementById("genBtn");
-
-      keyDiv.textContent = "⌛ Generating key.. Ruko Zara Sabar Karo.... XD";
-      timeDiv.textContent = "";
-      copiedMsg.textContent = "";
-      genBtn.disabled = true;
-
-      try {
-        const res = await fetch("https://license-api-zut2.onrender.com/addlicense", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ generate: true })
-        });
-
-        const data = await res.json();
-
-        if (data.success && data.licenseKey) {
-          const key = data.licenseKey;
-          const match = key.match(/--EXP-(\d+)/);
-          if (!match) throw new Error("Invalid expiry format");
-
-          const expiry = parseInt(match[1]) * 1000;
-
-          localStorage.setItem("key", key);
-          localStorage.setItem("expiry", expiry);
-
-          displayKey(key, expiry);
-        } else {
-          throw new Error("Invalid response");
-        }
-      } catch (err) {
-        console.error(err);
-        keyDiv.textContent = "❌ Failed to generate key.";
-        genBtn.disabled = false;
-      }
-    }
-
-    function displayKey(key, expiry) {
-      const keyDiv = document.getElementById("keyDisplay");
-      const timeDiv = document.getElementById("timeLeft");
-      const copiedMsg = document.getElementById("copiedMessage");
-      const genBtn = document.getElementById("genBtn");
-
-      keyDiv.textContent = `✅ Your License Key:\n${key}`;
-      navigator.clipboard.writeText(key);
-      copiedMsg.textContent = "📋 Copied to clipboard!";
-      genBtn.disabled = true;
-      genBtn.textContent = "Key Generated ✅";
-
-      clearInterval(timerInterval);
-      timerInterval = setInterval(() => {
-        const now = Date.now();
-        const remaining = expiry - now;
-
-        if (remaining <= 0) {
-          clearInterval(timerInterval);
-          localStorage.removeItem("key");
-          localStorage.removeItem("expiry");
-          timeDiv.textContent = "⛔ License expired! Generate again.";
-          genBtn.disabled = false;
-          genBtn.textContent = "Generate License Key";
-          return;
-        }
-
-        const totalSeconds = Math.floor(remaining / 1000);
-        const days = Math.floor(totalSeconds / 86400);
-        const hours = Math.floor((totalSeconds % 86400) / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-
-        let timeStr = "⏳ Time left: ";
-        if (days > 0) {
-          timeStr += `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        } else if (hours > 0) {
-          timeStr += `${hours}h ${minutes}m ${seconds}s`;
-        } else {
-          timeStr += `${minutes}m ${seconds}s`;
-        }
-
-        timeDiv.textContent = timeStr;
-      }, 1000);
     }
   </script>
-
 </body>
 </html>
